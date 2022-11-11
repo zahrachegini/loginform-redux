@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "../features/userslice";
 import "./login.css";
 
 const Login = () => {
@@ -6,12 +8,22 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(
+      login({
+        name: name,
+        email: email,
+        password: password,
+        loggedIn: true,
+      })
+    );
   };
   return (
     <div className="login">
-      <form onSubmit={handleSubmit} className="login-form">
+      <form onSubmit={(e) => handleSubmit(e)} className="login-form">
         <h1>Login here</h1>
         <input
           type="name"
